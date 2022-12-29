@@ -1,0 +1,300 @@
+body {
+  margin: 0;
+  background-color: #2b2c2f;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  /*overscroll-behavior: none;*/
+  overflow: hidden;
+  border: none;
+}
+
+/*loading animation*/
+#loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  text-align: center;
+  background-color: #2b2c2f;
+}
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #3498db;
+  -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #e74c3c;
+  -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #f9c922;
+  -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+.loader_text{
+  position: absolute;
+  top: 48.5%;
+  /*left: 47%;*/
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+}
+.loader_text:after {
+  content: "Loading";
+  font-weight: bold;
+  animation-name: textloading;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes textloading {
+  0% {
+    content: "Loading";
+  }
+  25% {
+    content: "Loading.";
+  }
+  50% {
+    content: "Loading..";
+  }
+  75% {
+    content: "Loading...";
+  }
+}
+
+@-webkit-keyframes spin {
+  0%   {
+    -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);  /* IE 9 */
+    transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+  100% {
+    -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);  /* IE 9 */
+    transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+}
+@keyframes spin {
+  0%   {
+    -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);  /* IE 9 */
+    transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+  100% {
+    -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);  /* IE 9 */
+    transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+a {
+  color: #ff0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+#info {
+  position: absolute;
+  /*top: 0px;*/
+  bottom: 0px;
+  width: 100%;
+  /*padding: 10px;*/
+  box-sizing: border-box;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1; /* TODO Solve this in HTML */
+  background-color: black;
+  opacity: 0.5;
+}
+
+#slide_buttons_mandi {
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1;
+  width: 100%;
+  bottom: 100px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+#slide_buttons_mandi button {
+  width: 3.8%;
+/*  height: 15px;*/
+  margin-left: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#slide_buttons_maxi {
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1;
+  width: 100%;
+  bottom: 150px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+#slide_buttons_maxi button {
+  width: 3.8%;
+/*  height: 15px;*/
+  margin-left: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+
+#playPause {
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1;
+  width: 100%;
+  bottom: 200px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+#playPause button {
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+#playPause button:disabled {
+  background-color: grey; /* Green */
+  opacity: 0.4;
+}
+/*a, button, input, select {
+  pointer-events: auto;
+}*/
+
+.dg.ac {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2 !important; /* TODO Solve this in HTML */
+}
+
+#overlay {
+  position: absolute;
+  font-size: 16px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0,0,0,0.7);
+}
+
+#notSupported {
+  width: 50%;
+  margin: auto;
+  background-color: #f00;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/*#Buttons
+{
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /*left: 25%;*/
+}*/
+
+#message
+{
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+
+#scene-container {
+  /* tell our scene container to take up the full page */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  /*
+    Set the container's background color to the same as the scene's
+    background to prevent flashing on load
+  */
+  background-color: skyblue;
+}
+
+@media screen and (max-width: 650px) {
+  #slide_buttons_mandi button {
+    width: 5.3%;
+    margin-left: -3px;
+    font-size: 8px;
+  }
+
+  #slide_buttons_maxi button {
+    width: 5.3%;
+    margin-left: -3px;
+    font-size: 8px;
+  }
+
+}
