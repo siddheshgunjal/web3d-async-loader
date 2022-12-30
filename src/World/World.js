@@ -15,9 +15,14 @@ let renderer;
 let scene;
 let loop;
 
+// let set0, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11, set12, set13, set14, set15, set16, set17;
+
+// var sets = [set0, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11, set12, set13, set14, set15, set16, set17]
+
 let j;
 
-var slideIndex = 0;
+var slideIndexMandi = 0;
+var slideIndexMaxi = 0;
 var timer = null;
 var isPlaying = false;
 let i;
@@ -33,6 +38,20 @@ var maxiList = [maxi_0, maxi_1, maxi_2, maxi_3, maxi_4, maxi_5, maxi_6, maxi_7, 
 
 var buttons_mandi;
 var buttons_maxi;
+
+var mandiVisible = true;
+var maxiVisible = true;
+
+var showMandibular;
+var showMaxillary;
+var showBothButton;
+
+let isMandiVisible = true;
+let isMaxiVisible = true;
+let isBothVisible = true;
+
+let mandi_counter = 0;
+let maxi_counter = 0;
 
 // var buttonName = [];
 
@@ -77,8 +96,11 @@ class World {
     }
 
     buttons_mandi = document.getElementsByClassName("button_mandi");
-
     buttons_maxi = document.getElementsByClassName("button_maxi");
+
+    showMandibular = document.getElementById("showMandibular");
+    showMaxillary = document.getElementById("showMaxillary");
+    showBothButton = document.getElementById("showBoth")
 
     let k;
     for (k = 0; k < buttons_mandi.length; k++) {
@@ -89,11 +111,123 @@ class World {
     this.addModel_1();
     this.add_();
     this.slideControl();
+    this.visibilityControl();
   }
 
 
   slideControl() {
-    
+    function startSlides() {
+      let s;
+      isPlaying = true;
+
+      for (s = 0; s < buttons_mandi.length; s++) {
+        buttons_mandi[s].disabled = false;
+        buttons_maxi[s].disabled = false;
+      }
+
+      if (isMandiVisible == true || isBothVisible == true) {
+        slideIndexMandi++;
+        if (slideIndexMandi > buttons_mandi.length) {slideIndexMandi = 1}    
+        buttons_mandi[slideIndexMandi-1].click();
+        buttons_mandi[slideIndexMandi-1].disabled = true;
+      }
+
+      if (isMaxiVisible == true || isBothVisible == true) {
+        slideIndexMaxi++;
+        if (slideIndexMaxi > buttons_maxi.length) {slideIndexMaxi = 1}
+        buttons_maxi[slideIndexMaxi-1].click();
+        buttons_maxi[slideIndexMaxi-1].disabled = true;
+      }
+
+      timer = setTimeout(startSlides, 1000); // Change image every 2 seconds
+      slideShowStart.disabled = true;
+      slideShowPause.disabled = false;
+    }
+    slideShowStart.addEventListener('click', startSlides);
+
+    function pauseSlides() {
+      isPlaying = false;
+      clearTimeout(timer);
+      timer = null;
+      slideShowStart.disabled = false;
+      slideShowPause.disabled = true;
+    }
+    slideShowPause.addEventListener('click', pauseSlides);
+  }
+
+
+  visibilityControl() {
+    function show_mandi() {
+      let x;
+
+      for (x = 0; x < buttons_maxi.length; x++) {
+        buttons_mandi[x].style.display = "inline-block";
+        buttons_maxi[x].style.display = "none";
+      }
+
+      for (x = 0; x < maxiList.length; x++) {
+        scene.remove(maxiList[x]);
+      }
+
+      if (isMandiVisible == false) {
+        for (x = 0; x < maxiList.length; x++) {
+          scene.remove(mandiList[x]);
+        }
+        scene.add(mandiList[mandi_counter]);
+      }
+
+      isMandiVisible = true;
+      isMaxiVisible = false;
+      isBothVisible = false;
+    }
+
+    function show_maxi() {
+      let x;
+
+      for (x = 0; x < buttons_mandi.length; x++) {
+        buttons_mandi[x].style.display = "none";
+        buttons_maxi[x].style.display = "inline-block";
+      }
+
+      for (x = 0; x < maxiList.length; x++) {
+        scene.remove(mandiList[x]);
+      }
+
+      if (isMaxiVisible == false) {
+        for (x = 0; x < mandiList.length; x++) {
+          scene.remove(maxiList[x]);
+        }
+        scene.add(maxiList[maxi_counter]);
+      }
+
+      isMandiVisible = false;
+      isMaxiVisible = true;
+      isBothVisible = false;
+    }
+
+    function show_both() {
+      let x;
+
+      for (x = 0; x < buttons_maxi.length; x++) {
+        buttons_mandi[x].style.display = "inline-block";
+        buttons_maxi[x].style.display = "inline-block";
+      }
+
+      for (x = 0; x < maxiList.length; x++) {
+        // scene.remove(maxiList[x]);
+      }
+
+      if (isBothVisible == false) {
+        scene.add(mandiList[mandi_counter]);
+        scene.add(maxiList[maxi_counter]);
+      }
+      isMandiVisible = true;
+      isMaxiVisible = true;
+      isBothVisible = true;
+    }
+    showMandibular.addEventListener('click', show_mandi);
+    showMaxillary.addEventListener('click', show_maxi);
+    showBothButton.addEventListener('click', show_both);
   }
 
 
@@ -132,38 +266,6 @@ class World {
     // }
 
 
-    function startSlides() {
-      let s;
-      isPlaying = true;
-
-      for (s = 0; s < buttons_mandi.length; s++) {
-        buttons_mandi[s].disabled = false;
-        buttons_maxi[s].disabled = false;
-      }
-      slideIndex++;
-      if (slideIndex > buttons_mandi.length) {slideIndex = 1}    
-      buttons_mandi[slideIndex-1].click();
-      buttons_mandi[slideIndex-1].disabled = true;
-
-      if (slideIndex > buttons_maxi.length) {slideIndex = 1}
-      buttons_maxi[slideIndex-1].click();
-      buttons_maxi[slideIndex-1].disabled = true;
-      timer = setTimeout(startSlides, 1000); // Change image every 2 seconds
-      slideShowStart.disabled = true;
-      slideShowPause.disabled = false;
-    }
-    slideShowStart.addEventListener('click', startSlides);
-
-    function pauseSlides() {
-      isPlaying = false;
-      clearTimeout(timer);
-      timer = null;
-      slideShowStart.disabled = false;
-      slideShowPause.disabled = true;
-    }
-    slideShowPause.addEventListener('click', pauseSlides);
-
-
     function showMandi_0(){
       let n;
 
@@ -178,7 +280,11 @@ class World {
       }
       buttons_mandi[0].disabled = true;
 
-      console.log('switched to Mandibular 0');
+      if (isPlaying == false) {
+        slideIndexMandi = 1;
+      }
+      mandi_counter = 0;
+      // console.log('switched to Mandibular 0');
     }
 
     buttons_mandi[0].addEventListener('click', showMandi_0);
@@ -197,7 +303,11 @@ class World {
       }
       buttons_mandi[1].disabled = true;
 
-      console.log('switched to Mandibular 1');
+      if (isPlaying == false) {
+        slideIndexMandi = 2;
+      }
+      mandi_counter = 1;
+      // console.log('switched to Mandibular 1');
     }
 
     buttons_mandi[1].addEventListener('click', showMandi_1);
@@ -216,7 +326,11 @@ class World {
       }
       buttons_mandi[2].disabled = true;
 
-      console.log('switched to Mandibular 2');
+      if (isPlaying == false) {
+        slideIndexMandi = 3;
+      }
+      mandi_counter = 2;
+      // console.log('switched to Mandibular 2');
     }
 
     buttons_mandi[2].addEventListener('click', showMandi_2);
@@ -235,7 +349,11 @@ class World {
       }
       buttons_mandi[3].disabled = true;
 
-      console.log('switched to Mandibular 3');
+      if (isPlaying == false) {
+        slideIndexMandi = 4;
+      }
+      mandi_counter = 3;
+      // console.log('switched to Mandibular 3');
     }
 
     buttons_mandi[3].addEventListener('click', showMandi_3);
@@ -254,7 +372,11 @@ class World {
       }
       buttons_mandi[4].disabled = true;
 
-      console.log('switched to Mandibular 4');
+      if (isPlaying == false) {
+        slideIndexMandi = 5;
+      }
+      mandi_counter = 4;
+      // console.log('switched to Mandibular 4');
     }
     buttons_mandi[4].addEventListener('click', showMandi_4);
 
@@ -272,7 +394,11 @@ class World {
       }
       buttons_mandi[5].disabled = true;
 
-      console.log('switched to Mandibular 5');
+      if (isPlaying == false) {
+        slideIndexMandi = 6;
+      }
+      mandi_counter = 5;
+      // console.log('switched to Mandibular 5');
 
     }
     buttons_mandi[5].addEventListener('click', showMandi_5);
@@ -291,7 +417,11 @@ class World {
       }
       buttons_mandi[6].disabled = true;
 
-      console.log('switched to Mandibular 6');
+      if (isPlaying == false) {
+        slideIndexMandi = 7;
+      }
+      mandi_counter = 6;
+      // console.log('switched to Mandibular 6');
 
     }
     buttons_mandi[6].addEventListener('click', showMandi_6);
@@ -310,7 +440,11 @@ class World {
       }
       buttons_mandi[7].disabled = true;
 
-      console.log('switched to Mandibular 7');
+      if (isPlaying == false) {
+        slideIndexMandi = 8;
+      }
+      mandi_counter = 7;
+      // console.log('switched to Mandibular 7');
 
     }
     buttons_mandi[7].addEventListener('click', showMandi_7);
@@ -329,7 +463,11 @@ class World {
       }
       buttons_mandi[8].disabled = true;
 
-      console.log('switched to Mandibular 8');
+      if (isPlaying == false) {
+        slideIndexMandi = 9;
+      }
+      mandi_counter = 8;
+      // console.log('switched to Mandibular 8');
     }
     buttons_mandi[8].addEventListener('click', showMandi_8);
 
@@ -347,7 +485,11 @@ class World {
       }
       buttons_mandi[9].disabled = true;
 
-      console.log('switched to Mandibular 9');
+      if (isPlaying == false) {
+        slideIndexMandi = 10;
+      }
+      mandi_counter = 9;
+      // console.log('switched to Mandibular 9');
     }
 
     buttons_mandi[9].addEventListener('click', showMandi_9);
@@ -366,7 +508,11 @@ class World {
       }
       buttons_mandi[10].disabled = true;
 
-      console.log('switched to Mandibular 10');
+      if (isPlaying == false) {
+        slideIndexMandi = 11;
+      }
+      mandi_counter = 10;
+      // console.log('switched to Mandibular 10');
     }
 
     buttons_mandi[10].addEventListener('click', showMandi_10);
@@ -385,7 +531,11 @@ class World {
       }
       buttons_mandi[11].disabled = true;
 
-      console.log('switched to Mandibular 11');
+      if (isPlaying == false) {
+        slideIndexMandi = 12;
+      }
+      mandi_counter = 11;
+      // console.log('switched to Mandibular 11');
     }
 
     buttons_mandi[11].addEventListener('click', showMandi_11);
@@ -404,7 +554,11 @@ class World {
       }
       buttons_mandi[12].disabled = true;
 
-      console.log('switched to Mandibular 12');
+      if (isPlaying == false) {
+        slideIndexMandi = 13;
+      }
+      mandi_counter = 12;
+      // console.log('switched to Mandibular 12');
     }
 
     buttons_mandi[12].addEventListener('click', showMandi_12);
@@ -423,7 +577,11 @@ class World {
       }
       buttons_mandi[13].disabled = true;
 
-      console.log('switched to Mandibular 13');
+      if (isPlaying == false) {
+        slideIndexMandi = 14;
+      }
+      mandi_counter = 13;
+      // console.log('switched to Mandibular 13');
     }
 
     buttons_mandi[13].addEventListener('click', showMandi_13);
@@ -442,7 +600,11 @@ class World {
       }
       buttons_mandi[14].disabled = true;
 
-      console.log('switched to Mandibular 14');
+      if (isPlaying == false) {
+        slideIndexMandi = 15;
+      }
+      mandi_counter = 14;
+      // console.log('switched to Mandibular 14');
     }
 
     buttons_mandi[14].addEventListener('click', showMandi_14);
@@ -461,7 +623,11 @@ class World {
       }
       buttons_mandi[15].disabled = true;
 
-      console.log('switched to Mandibular 15');
+      if (isPlaying == false) {
+        slideIndexMandi = 16;
+      }
+      mandi_counter = 15;
+      // console.log('switched to Mandibular 15');
     }
 
     buttons_mandi[15].addEventListener('click', showMandi_15);
@@ -480,7 +646,11 @@ class World {
       }
       buttons_mandi[16].disabled = true;
 
-      console.log('switched to Mandibular 16');
+      if (isPlaying == false) {
+        slideIndexMandi = 17;
+      }
+      mandi_counter = 16;
+      // console.log('switched to Mandibular 16');
     }
 
     buttons_mandi[16].addEventListener('click', showMandi_16);
@@ -499,7 +669,11 @@ class World {
       }
       buttons_mandi[17].disabled = true;
 
-      console.log('switched to Mandibular 17');
+      if (isPlaying == false) {
+        slideIndexMandi = 18;
+      }
+      mandi_counter = 17;
+      // console.log('switched to Mandibular 17');
     }
 
     buttons_mandi[17].addEventListener('click', showMandi_17);
@@ -518,7 +692,11 @@ class World {
       }
       buttons_maxi[0].disabled = true;
 
-      console.log('switched to Maxillary 0');
+      if (isPlaying == false) {
+        slideIndexMaxi = 1;
+      }
+      maxi_counter = 0;
+      // console.log('switched to Maxillary 0');
     }
 
     buttons_maxi[0].addEventListener('click', showMaxi_0);
@@ -537,7 +715,11 @@ class World {
       }
       buttons_maxi[1].disabled = true;
 
-      console.log('switched to Maxillary 1');
+      if (isPlaying == false) {
+        slideIndexMaxi = 2;
+      }
+      maxi_counter = 1;
+      // console.log('switched to Maxillary 1');
     }
 
     buttons_maxi[1].addEventListener('click', showMaxi_1);
@@ -556,7 +738,11 @@ class World {
       }
       buttons_maxi[2].disabled = true;
 
-      console.log('switched to Maxillary 2');
+      if (isPlaying == false) {
+        slideIndexMaxi = 3;
+      }
+      maxi_counter = 2;
+      // console.log('switched to Maxillary 2');
     }
 
     buttons_maxi[2].addEventListener('click', showMaxi_2);
@@ -575,7 +761,11 @@ class World {
       }
       buttons_maxi[3].disabled = true;
 
-      console.log('switched to Maxillary 3');
+      if (isPlaying == false) {
+        slideIndexMaxi = 4;
+      }
+      maxi_counter = 3;
+      // console.log('switched to Maxillary 3');
     }
 
     buttons_maxi[3].addEventListener('click', showMaxi_3);
@@ -594,7 +784,11 @@ class World {
       }
       buttons_maxi[4].disabled = true;
 
-      console.log('switched to Maxillary 4');
+      if (isPlaying == false) {
+        slideIndexMaxi = 5;
+      }
+      maxi_counter = 4;
+      // console.log('switched to Maxillary 4');
     }
     buttons_maxi[4].addEventListener('click', showMaxi_4);
 
@@ -612,7 +806,11 @@ class World {
       }
       buttons_maxi[5].disabled = true;
 
-      console.log('switched to Maxillary 5');
+      if (isPlaying == false) {
+        slideIndexMaxi = 6;
+      }
+      maxi_counter = 5;
+      // console.log('switched to Maxillary 5');
     }
     buttons_maxi[5].addEventListener('click', showMaxi_5);
 
@@ -630,7 +828,11 @@ class World {
       }
       buttons_maxi[6].disabled = true;
 
-      console.log('switched to Maxillary 6');
+      if (isPlaying == false) {
+        slideIndexMaxi = 7;
+      }
+      maxi_counter = 6;
+      // console.log('switched to Maxillary 6');
     }
     buttons_maxi[6].addEventListener('click', showMaxi_6);
 
@@ -648,7 +850,11 @@ class World {
       }
       buttons_maxi[7].disabled = true;
 
-      console.log('switched to Maxillary 7');
+      if (isPlaying == false) {
+        slideIndexMaxi = 8;
+      }
+      maxi_counter = 7;
+      // console.log('switched to Maxillary 7');
 
     }
     buttons_maxi[7].addEventListener('click', showMaxi_7);
@@ -667,7 +873,11 @@ class World {
       }
       buttons_maxi[8].disabled = true;
 
-      console.log('switched to Maxillary 8');
+      if (isPlaying == false) {
+        slideIndexMaxi = 9;
+      }
+      maxi_counter = 8;
+      // console.log('switched to Maxillary 8');
     }
     buttons_maxi[8].addEventListener('click', showMaxi_8);
 
@@ -685,7 +895,11 @@ class World {
       }
       buttons_maxi[9].disabled = true;
 
-      console.log('switched to Maxillary 9');
+      if (isPlaying == false) {
+        slideIndexMaxi = 10;
+      }
+      maxi_counter = 9;
+      // console.log('switched to Maxillary 9');
     }
 
     buttons_maxi[9].addEventListener('click', showMaxi_9);
@@ -704,7 +918,11 @@ class World {
       }
       buttons_maxi[10].disabled = true;
 
-      console.log('switched to Maxillary 10');
+      if (isPlaying == false) {
+        slideIndexMaxi = 11;
+      }
+      maxi_counter = 10;
+      // console.log('switched to Maxillary 10');
     }
 
     buttons_maxi[10].addEventListener('click', showMaxi_10);
@@ -723,7 +941,11 @@ class World {
       }
       buttons_maxi[11].disabled = true;
 
-      console.log('switched to Maxillary 11');
+      if (isPlaying == false) {
+        slideIndexMaxi = 12;
+      }
+      maxi_counter = 11;
+      // console.log('switched to Maxillary 11');
     }
 
     buttons_maxi[11].addEventListener('click', showMaxi_11);
@@ -742,7 +964,11 @@ class World {
       }
       buttons_maxi[12].disabled = true;
 
-      console.log('switched to Maxillary 12');
+      if (isPlaying == false) {
+        slideIndexMaxi = 13;
+      }
+      maxi_counter = 12;
+      // console.log('switched to Maxillary 12');
     }
 
     buttons_maxi[12].addEventListener('click', showMaxi_12);
@@ -761,7 +987,11 @@ class World {
       }
       buttons_maxi[13].disabled = true;
 
-      console.log('switched to Maxillary 13');
+      if (isPlaying == false) {
+        slideIndexMaxi = 14;
+      }
+      maxi_counter = 13;
+      // console.log('switched to Maxillary 13');
     }
 
     buttons_maxi[13].addEventListener('click', showMaxi_13);
@@ -780,7 +1010,11 @@ class World {
       }
       buttons_maxi[14].disabled = true;
 
-      console.log('switched to Maxillary 14');
+      if (isPlaying == false) {
+        slideIndexMaxi = 15;
+      }
+      maxi_counter = 14;
+      // console.log('switched to Maxillary 14');
     }
 
     buttons_maxi[14].addEventListener('click', showMaxi_14);
@@ -800,7 +1034,11 @@ class World {
 
       buttons_maxi[15].disabled = true;
 
-      console.log('switched to Maxillary 15');
+      if (isPlaying == false) {
+        slideIndexMaxi = 16;
+      }
+      maxi_counter = 15;
+      // console.log('switched to Maxillary 15');
     }
 
     buttons_maxi[15].addEventListener('click', showMaxi_15);
@@ -820,7 +1058,11 @@ class World {
 
       buttons_maxi[16].disabled = true;
 
-      console.log('switched to Maxillary 16');
+      if (isPlaying == false) {
+        slideIndexMaxi = 17;
+      }
+      maxi_counter = 16;
+      // console.log('switched to Maxillary 16');
     }
 
     buttons_maxi[16].addEventListener('click', showMaxi_16);
@@ -840,7 +1082,11 @@ class World {
 
       buttons_maxi[17].disabled = true;
 
-      console.log('switched to Maxillary 17');
+      if (isPlaying == false) {
+        slideIndexMaxi = 18;
+      }
+      maxi_counter = 17;
+      // console.log('switched to Maxillary 17');
     }
     buttons_maxi[17].addEventListener('click', showMaxi_17);
   }

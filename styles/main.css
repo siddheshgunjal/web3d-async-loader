@@ -165,9 +165,17 @@ button {
 #slide_buttons_mandi button {
   width: 3.8%;
 /*  height: 15px;*/
+  background-color: #f44336;
+  border: none;
+  color: white;
   margin-left: 1px;
   font-size: 16px;
   text-align: center;
+}
+
+#slide_buttons_mandi button:disabled {
+  background-color: grey;
+  opacity: 0.4;
 }
 
 #slide_buttons_maxi {
@@ -183,37 +191,79 @@ button {
 #slide_buttons_maxi button {
   width: 3.8%;
 /*  height: 15px;*/
+  background-color: #f44336;
+  border: none;
+  color: white;
   margin-left: 1px;
   font-size: 16px;
   text-align: center;
 }
 
+#slide_buttons_maxi button:disabled {
+  background-color: grey;
+  opacity: 0.4;
+}
 
 #playPause {
   position: absolute;
-  white-space: nowrap;
   z-index: 1;
-  width: 100%;
-  bottom: 200px;
+  width: 250px;
+  height: 100%;
+  right: 0;
   text-align: center;
-  overflow-x: auto;
 }
 
 #playPause button {
-  background-color: #f44336; /* Green */
+  position: relative;
+  background-color: #f44336;
   border: none;
   color: white;
+  width: 150px;
   padding: 10px 25px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 10px 2px 10px 2px;
   cursor: pointer;
   border-radius: 12px;
+  top: 45%;
+  transform: translateY(-50%);
 }
 
 #playPause button:disabled {
-  background-color: grey; /* Green */
+  background-color: grey;
+  opacity: 0.4;
+}
+
+#showHide {
+  position: absolute;
+/*  white-space: nowrap;*/
+  z-index: 1;
+  width: 200px;
+  height: 100%;
+  left: 0;
+  text-align: center;
+}
+
+#showHide button {
+  position: relative;
+  background-color: #f44336;
+  border: none;
+  color: white;
+  width: 150px;
+  padding: 10px 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px 10px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+#showHide button:disabled {
+  background-color: grey;
   opacity: 0.4;
 }
 /*a, button, input, select {
