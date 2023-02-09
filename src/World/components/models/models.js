@@ -7,7 +7,7 @@ var loadingManager = null;
 var RESOURCES_LOADED = false;
 
 const posx = 0;
-const posy = 0.35;
+const posy = 0.22;
 const posz = 0;
 const scale = 0.012;
 
@@ -73,14 +73,17 @@ var modelArray = [model0L, model0U, model1L, model1U, model2L, model2U, model3L,
 
 async function loadInit() {
 
-  // console.log(modelArray.length);
+  let loading_bar = document.getElementById("greenBar")
 
   // Create a loading manager to set RESOURCES_LOADED when appropriate.
   // Pass loadingManager to all resource loaders.
   loadingManager = new LoadingManager();
     
   loadingManager.onProgress = function(item, loaded, total){
-    console.log(item, loaded, total);
+    // console.log(item, loaded, total);
+    // console.log('Loaded:', Math.round(loaded / total * 100, 2) + '%')
+    loading_bar.style.width = (Math.round(loaded / total * 100, 2) + '%')
+    loading_bar.innerHTML = (Math.round(loaded / total * 100, 2) + '%')
   };
   
   loadingManager.onLoad = function(){
@@ -90,666 +93,120 @@ async function loadInit() {
 
   const loader = new GLTFLoader(loadingManager);
 
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[0]),
-    loader.loadAsync(modelArray[1]),
+  const [model_L0, model_U0, model_L1, model_U1, model_L2, model_U2,
+        model_L3, model_U3, model_L4, model_U4, model_L5, model_U5,
+        model_L6, model_U6, model_L7, model_U7, model_L8, model_U8,
+        model_L9, model_U9, model_L10, model_U10, model_L11, model_U11,
+        model_L12, model_U12, model_L13, model_U13, model_L14, model_U14,
+        model_L15, model_U15, model_L16, model_U16, model_L17, model_U17] = await Promise.all([
+    loader.loadAsync(modelArray[0]), loader.loadAsync(modelArray[1]),
+    loader.loadAsync(modelArray[2]), loader.loadAsync(modelArray[3]),
+    loader.loadAsync(modelArray[4]), loader.loadAsync(modelArray[5]),
+    loader.loadAsync(modelArray[6]), loader.loadAsync(modelArray[7]),
+    loader.loadAsync(modelArray[8]), loader.loadAsync(modelArray[9]),
+    loader.loadAsync(modelArray[10]), loader.loadAsync(modelArray[11]),
+    loader.loadAsync(modelArray[12]), loader.loadAsync(modelArray[13]),
+    loader.loadAsync(modelArray[14]), loader.loadAsync(modelArray[15]),
+    loader.loadAsync(modelArray[16]), loader.loadAsync(modelArray[17]),
+    loader.loadAsync(modelArray[18]), loader.loadAsync(modelArray[19]),
+    loader.loadAsync(modelArray[20]), loader.loadAsync(modelArray[21]),
+    loader.loadAsync(modelArray[22]), loader.loadAsync(modelArray[23]),
+    loader.loadAsync(modelArray[24]), loader.loadAsync(modelArray[25]),
+    loader.loadAsync(modelArray[26]), loader.loadAsync(modelArray[27]),
+    loader.loadAsync(modelArray[28]), loader.loadAsync(modelArray[29]),
+    loader.loadAsync(modelArray[30]), loader.loadAsync(modelArray[31]),
+    loader.loadAsync(modelArray[32]), loader.loadAsync(modelArray[33]),
+    loader.loadAsync(modelArray[34]), loader.loadAsync(modelArray[35]),
   ]);
 
   // console.log('Done!', model_L);
 
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  // mandibular.castShadow = true;
-  mandibular.receiveShadow = false;
+  const mandibular0 = setupModel(model_L0);
+  const maxillar0 = setupModel(model_U0);
 
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  // maxillary.castShadow = true;
-  maxillary.receiveShadow = false;
+  const mandibular1 = setupModel(model_L1);
+  const maxillar1 = setupModel(model_U1);
+
+  const mandibular2 = setupModel(model_L2);
+  const maxillar2 = setupModel(model_U2);
+
+  const mandibular3 = setupModel(model_L3);
+  const maxillar3 = setupModel(model_U3);
+
+  const mandibular4 = setupModel(model_L4);
+  const maxillar4 = setupModel(model_U4);
+
+  const mandibular5 = setupModel(model_L5);
+  const maxillar5 = setupModel(model_U5);
+
+  const mandibular6 = setupModel(model_L6);
+  const maxillar6 = setupModel(model_U6);
+
+  const mandibular7 = setupModel(model_L7);
+  const maxillar7 = setupModel(model_U7);
+
+  const mandibular8 = setupModel(model_L8);
+  const maxillar8 = setupModel(model_U8);
+
+  const mandibular9 = setupModel(model_L9);
+  const maxillar9 = setupModel(model_U9);
+
+  const mandibular10 = setupModel(model_L10);
+  const maxillar10 = setupModel(model_U10);
+
+  const mandibular11 = setupModel(model_L11);
+  const maxillar11 = setupModel(model_U11);
+
+  const mandibular12 = setupModel(model_L12);
+  const maxillar12 = setupModel(model_U12);
+
+  const mandibular13 = setupModel(model_L13);
+  const maxillar13 = setupModel(model_U13);
+
+  const mandibular14 = setupModel(model_L14);
+  const maxillar14 = setupModel(model_U14);
+
+  const mandibular15 = setupModel(model_L15);
+  const maxillar15 = setupModel(model_U15);
+
+  const mandibular16 = setupModel(model_L16);
+  const maxillar16 = setupModel(model_U16);
+
+  const mandibular17 = setupModel(model_L17);
+  const maxillar17 = setupModel(model_U17);
+
+  let mandiArray = [mandibular0, mandibular1, mandibular2, mandibular3, mandibular4, mandibular5, mandibular6, mandibular7,
+    mandibular8, mandibular9, mandibular10, mandibular11, mandibular12, mandibular13, mandibular14, mandibular15,
+    mandibular16, mandibular17]
+  let maxiArray = [maxillar0, maxillar1, maxillar2, maxillar3, maxillar4, maxillar5, maxillar6, maxillar7,
+    maxillar8, maxillar9, maxillar10, maxillar11, maxillar12, maxillar13, maxillar14, maxillar15,
+    maxillar16, maxillar17]
+
+  let i;
+
+  for (i = 0; i < mandiArray.length; i++) {
+      mandiArray[i].position.set(posx, -posy, posz);
+      // mandiArray[i].rotation.set(  -Math.PI/2, 0, 0 );
+      mandiArray[i].scale.set(scale, scale, scale);
+      // mandiArray[i].castShadow = true;
+      mandiArray[i].receiveShadow = false;
+
+      maxiArray[i].position.set(posx, posy, posz);
+      maxiArray[i].rotation.set( Math.PI/2, 0, 0 );
+      maxiArray[i].scale.set(scale, scale, scale);
+      // maxiArray[i].castShadow = true;
+      maxiArray[i].receiveShadow = false;
+    }
 
   return {
-    mandibular,
-    maxillary,
+    mandibular0, mandibular1, mandibular2, mandibular3, mandibular4, mandibular5, mandibular6, mandibular7,
+    mandibular8, mandibular9, mandibular10, mandibular11, mandibular12, mandibular13, mandibular14, mandibular15,
+    mandibular16, mandibular17,
+    maxillar0, maxillar1, maxillar2, maxillar3, maxillar4, maxillar5, maxillar6, maxillar7,
+    maxillar8, maxillar9, maxillar10, maxillar11, maxillar12, maxillar13, maxillar14, maxillar15,
+    maxillar16, maxillar17,
     RESOURCES_LOADED
   };
 }
 
-async function loadNext1() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[2]),
-    loader.loadAsync(modelArray[3]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 1');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext2() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[4]),
-    loader.loadAsync(modelArray[5]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 2');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext3() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[6]),
-    loader.loadAsync(modelArray[7]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 3');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext4() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[8]),
-    loader.loadAsync(modelArray[9]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 4');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext5() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[10]),
-    loader.loadAsync(modelArray[11]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 5');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext6() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[12]),
-    loader.loadAsync(modelArray[13]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 6');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext7() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[14]),
-    loader.loadAsync(modelArray[15]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 7');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext8() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[16]),
-    loader.loadAsync(modelArray[17]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 8');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext9() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[18]),
-    loader.loadAsync(modelArray[19]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 9');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext10() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[20]),
-    loader.loadAsync(modelArray[21]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 10');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext11() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[22]),
-    loader.loadAsync(modelArray[23]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 11');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext12() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[24]),
-    loader.loadAsync(modelArray[25]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 12');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext13() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[26]),
-    loader.loadAsync(modelArray[27]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 13');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext14() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[28]),
-    loader.loadAsync(modelArray[29]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 14');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext15() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[30]),
-    loader.loadAsync(modelArray[31]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 15');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext16() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[32]),
-    loader.loadAsync(modelArray[33]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 16');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-async function loadNext17() {
-
-  const loader = new GLTFLoader();
-
-  const [model_L, model_U] = await Promise.all([
-    loader.loadAsync(modelArray[34]),
-    loader.loadAsync(modelArray[35]),
-  ]);
-
-  // console.log('Loaded set 1!', model_L, model_U);
-  console.log('Loaded set 17');
-
-  const mandibular = setupModel(model_L);
-  mandibular.position.set(posx, -posy, posz);
-  // mandibular.rotation.set(  -Math.PI/2, 0, 0 );
-  mandibular.scale.set(scale, scale, scale);
-  mandibular.castShadow = true;
-  mandibular.receiveShadow = true;
-
-  const maxillary = setupModel(model_U);
-  maxillary.position.set(posx, posy, posz);
-  maxillary.rotation.set( Math.PI/2, 0, 0 );
-  maxillary.scale.set(scale, scale, scale);
-  maxillary.castShadow = true;
-  maxillary.receiveShadow = true;
-
-  return {
-    mandibular,
-    maxillary
-  };
-}
-
-// async function loadRemaining() {
-//   const loader = new GLTFLoader();
-
-//   const [model1, model1_, model2, model2_, model3, model3_] = await Promise.all([
-//     loader.loadAsync('./assets/Version_1_Subsetup1/Mandibular.glb'),
-//     loader.loadAsync('./assets/Version_1_Subsetup1/Maxillary.glb'),
-//     loader.loadAsync('./assets/Version_1_Subsetup2/Mandibular.glb'),
-//     loader.loadAsync('./assets/Version_1_Subsetup2/Maxillary.glb'),
-//     loader.loadAsync('./assets/Version_1_Subsetup3/Mandibular.glb'),
-//     loader.loadAsync('./assets/Version_1_Subsetup3/Maxillary.glb'),
-//   ]);
-
-//   console.log('Squaaawk!', model1, model1_, model2, model2_, model3, model3_);
-
-//   //set1
-//   const mandibular1 = setupModel(model1);
-//   mandibular1.position.set(posx, -posy, posz);
-//   // mandibular1.rotation.set(  -Mmodel1ath.PI/2, 0, 0 );
-//   mandibular1.scale.set(scale, scale, scale);
-//   mandibular1.castShadow = true;
-//   mandibular1.receiveShadow = true;
-
-//   const maxillary1 = setupModel(model1_);
-//   maxillary1.position.set(posx, posy, posz);
-//   maxillary1.rotation.set( Math.PI, 0, 0 );
-//   maxillary1.scale.set(scale, scale, scale);
-//   maxillary1.castShadow = true;
-//   maxillary1.receiveShadow = true;
-
-//   //set2
-//   const mandibular2 = setupModel(model2);
-//   mandibular2.position.set(posx, -posy, posz);
-//   // mandibular2.rotation.set(  -Mmodel1ath.PI/2, 0, 0 );
-//   mandibular2.scale.set(scale, scale, scale);
-//   mandibular2.castShadow = true;
-//   mandibular2.receiveShadow = true;
-
-//   const maxillary2 = setupModel(model2_);
-//   maxillary2.position.set(posx, posy, posz);
-//   maxillary2.rotation.set( Math.PI, 0, 0 );
-//   maxillary2.scale.set(scale, scale, scale);
-//   maxillary2.castShadow = true;
-//   maxillary2.receiveShadow = true;
-
-//   //set3
-//   const mandibular3 = setupModel(model3);
-//   mandibular3.position.set(posx, -posy, posz);
-//   // mandibular3.rotation.set(  -Mmodel1ath.PI/2, 0, 0 );
-//   mandibular3.scale.set(scale, scale, scale);
-//   mandibular3.castShadow = true;
-//   mandibular3.receiveShadow = true;
-
-//   const maxillary3 = setupModel(model3_);
-//   maxillary3.position.set(posx, posy, posz);
-//   maxillary3.rotation.set( Math.PI, 0, 0 );
-//   maxillary3.scale.set(scale, scale, scale);
-//   maxillary3.castShadow = true;
-//   maxillary3.receiveShadow = true;
-
-//   return {
-//     mandibular1,
-//     maxillary1,
-//     mandibular2,
-//     maxillary2,
-//     mandibular3,
-//     maxillary3
-//   };
-// }
-
-// async function loadRemaining() {
-//   const loader1 = new MTLLoader();
-//   const loader2 = new OBJLoader();
-
-//   const [storkData] = await Promise.all([
-//     loader1.loadAsync('./assets/models/Mandibular.mtl', function(materials){
-//       materials.preload();
-//       loader2.setMaterial(materials).loadAsync('.assets/models/Mandibular.obj')}),
-//   ]);
-
-//   console.log('stork!', storkData);
-
-//   // const stork = setupModel(storkData);
-//   const stork = storkData;
-//   // stork.position.set(0, -2.5, -10);
-
-//   return {
-//     stork,
-//   };
-// }
-
-export { loadInit, loadNext1, loadNext2, loadNext3, loadNext4, loadNext5, loadNext6, loadNext7, loadNext8, loadNext9, loadNext10, loadNext11, loadNext12, loadNext13, loadNext14, loadNext15, loadNext16, loadNext17 };
+export {loadInit};

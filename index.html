@@ -18,7 +18,10 @@
 
   <div id="loader-wrapper">
     <div id="loader"></div>
-      <div class="loader_text"></div>
+    <div class="loader_text" id="loader_text">Loading</div>
+    <div class="progressbarWrapper">
+      <span id="greenBar"></span>
+    </div>
   </div>
 
   <div id="scene-container">
@@ -26,7 +29,7 @@
   </div>
 
   <div id="slide_buttons_mandi">
-    <button class="button_mandi" id='mandi_init'>0</button>
+    <button class="button_mandi" id='mandi_init' disabled>0</button>
     <button class="button_mandi" id="mandi_1">1</button>
     <button class="button_mandi" id="mandi_2">2</button>
     <button class="button_mandi" id="mandi_3">3</button>
@@ -47,7 +50,7 @@
   </div>
 
   <div id="slide_buttons_maxi">
-    <button class="button_maxi" id='maxi_init'>0</button>
+    <button class="button_maxi" id='maxi_init' disabled>0</button>
     <button class="button_maxi" id="maxi_1">1</button>
     <button class="button_maxi" id="maxi_2">2</button>
     <button class="button_maxi" id="maxi_3">3</button>
@@ -75,7 +78,7 @@
   <div id="showHide">
     <button id="showMandibular">Show Lower</button>
     <button id="showMaxillary">Show Upper</button>
-    <button id="showBoth">Show Both</button>
+    <button id="showBoth" disabled>Show Both</button>
   </div>
 
   <div id="info">

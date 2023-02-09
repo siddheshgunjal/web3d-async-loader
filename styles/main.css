@@ -25,7 +25,7 @@ body {
   display: block;
   position: relative;
   left: 50%;
-  top: 50%;
+  top: 45%;
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
@@ -66,14 +66,15 @@ body {
 
 .loader_text{
   position: absolute;
-  top: 48.5%;
+  top: 43.5%;
   /*left: 47%;*/
   width: 100%;
   display: flex;
   justify-content: center;
   font-size: 17px;
 }
-.loader_text:after {
+
+/*.loader_text:after {
   content: "Loading";
   font-weight: bold;
   animation-name: textloading;
@@ -93,6 +94,41 @@ body {
   75% {
     content: "Loading...";
   }
+}*/
+
+.progressbarWrapper {
+  top: 32%;
+  height: 30px;
+  width: 500px;
+  max-width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 20vh;
+  position: relative;
+  background: #555;
+  padding: 4px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+#greenBar {
+  display: block;
+  height: 100%;
+  width: 0px;
+  background-color: rgb(43, 194, 83);
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43, 194, 83) 37%,
+    rgb(84, 240, 84) 69%
+  );
+  position: relative;
+  overflow: hidden;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  transition: all 700ms ease;
+  box-shadow: 0 0 20px #4dff88, 0 0 25px #4dff88;
 }
 
 @-webkit-keyframes spin {
@@ -208,7 +244,8 @@ button {
   position: absolute;
   z-index: 1;
   width: 250px;
-  height: 100%;
+  top: 50%;
+  transform: translate(0%, -50%);
   right: 0;
   text-align: center;
 }
@@ -226,8 +263,8 @@ button {
   margin: 10px 2px 10px 2px;
   cursor: pointer;
   border-radius: 12px;
-  top: 45%;
-  transform: translateY(-50%);
+  /*top: 45%;
+  transform: translateY(-50%);*/
 }
 
 #playPause button:disabled {
@@ -240,7 +277,8 @@ button {
 /*  white-space: nowrap;*/
   z-index: 1;
   width: 200px;
-  height: 100%;
+  top: 50%;
+  transform: translate(0%, -50%);
   left: 0;
   text-align: center;
 }
@@ -258,8 +296,8 @@ button {
   margin: 10px 2px 10px 2px;
   cursor: pointer;
   border-radius: 12px;
-  top: 40%;
-  transform: translateY(-50%);
+  /*top: 40%;
+  transform: translateY(-50%);*/
 }
 
 #showHide button:disabled {

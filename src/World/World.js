@@ -1,6 +1,7 @@
-import { loadInit, loadNext1, loadNext2, loadNext3, loadNext4, loadNext5, loadNext6 } from './components/models/models.js';
-import { loadNext7, loadNext8, loadNext9, loadNext10, loadNext11, loadNext12 } from './components/models/models.js';
-import { loadNext13, loadNext14, loadNext15, loadNext16, loadNext17 } from './components/models/models.js';
+import { loadInit } from './components/models/models.js';
+// import { loadInit, loadNext1, loadNext2, loadNext3, loadNext4, loadNext5, loadNext6 } from './components/models/models.js';
+// import { loadNext7, loadNext8, loadNext9, loadNext10, loadNext11, loadNext12 } from './components/models/models.js';
+// import { loadNext13, loadNext14, loadNext15, loadNext16, loadNext17 } from './components/models/models.js';
 import { createCamera } from './components/camera.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
@@ -75,13 +76,71 @@ class World {
   }
 
   async init() {
-    const { mandibular, maxillary, RESOURCES_LOADED } = await loadInit();
+    const { mandibular0, mandibular1, mandibular2, mandibular3, mandibular4, mandibular5, mandibular6, mandibular7,
+    mandibular8, mandibular9, mandibular10, mandibular11, mandibular12, mandibular13, mandibular14, mandibular15,
+    mandibular16, mandibular17,
+    maxillar0, maxillar1, maxillar2, maxillar3, maxillar4, maxillar5, maxillar6, maxillar7,
+    maxillar8, maxillar9, maxillar10, maxillar11, maxillar12, maxillar13, maxillar14, maxillar15,
+    maxillar16, maxillar17,
+    RESOURCES_LOADED } = await loadInit();
 
-    // move the target to the center of the model
-    controls.target.copy(mandibular.position);
+    // Adjust the controller target
+    controls.target.set(0, -0.15, 0);
+    // controls.target.copy(mandibular.position);
 
-    mandiList[0] = mandibular;
-    maxiList[0] = maxillary;
+    mandiList[0] = mandibular0;
+    maxiList[0] = maxillar0;
+
+    mandiList[1] = mandibular1;
+    maxiList[1] = maxillar1;
+
+    mandiList[2] = mandibular2;
+    maxiList[2] = maxillar2;
+    
+    mandiList[3] = mandibular3;
+    maxiList[3] = maxillar3;
+    
+    mandiList[4] = mandibular4;
+    maxiList[4] = maxillar4;
+
+    mandiList[5] = mandibular5;
+    maxiList[5] = maxillar5;
+    
+    mandiList[6] = mandibular6;
+    maxiList[6] = maxillar6;
+    
+    mandiList[7] = mandibular7;
+    maxiList[7] = maxillar7;
+    
+    mandiList[8] = mandibular8;
+    maxiList[8] = maxillar8;
+
+    mandiList[9] = mandibular9;
+    maxiList[9] = maxillar9;
+
+    mandiList[10] = mandibular10;
+    maxiList[10] = maxillar10;
+
+    mandiList[11] = mandibular11;
+    maxiList[11] = maxillar11;
+
+    mandiList[12] = mandibular12;
+    maxiList[12] = maxillar12;
+
+    mandiList[13] = mandibular13;
+    maxiList[13] = maxillar13;
+
+    mandiList[14] = mandibular14;
+    maxiList[14] = maxillar14;
+
+    mandiList[15] = mandibular15;
+    maxiList[15] = maxillar15;
+
+    mandiList[16] = mandibular16;
+    maxiList[16] = maxillar16;
+
+    mandiList[17] = mandibular17;
+    maxiList[17] = maxillar17;
 
     scene.add(mandiList[0], maxiList[0]);
 
@@ -102,14 +161,13 @@ class World {
     showMaxillary = document.getElementById("showMaxillary");
     showBothButton = document.getElementById("showBoth")
 
-    let k;
-    for (k = 0; k < buttons_mandi.length; k++) {
-      buttons_mandi[k].disabled = true;
-      buttons_maxi[k].disabled = true; 
-    }
+    // let k;
+    // for (k = 0; k < buttons_mandi.length; k++) {
+    //   buttons_mandi[k].disabled = true;
+    //   buttons_maxi[k].disabled = true; 
+    // }
 
-    this.addModel_1();
-    this.add_();
+    this.show_master();
     this.slideControl();
     this.visibilityControl();
   }
@@ -174,7 +232,12 @@ class World {
           scene.remove(mandiList[x]);
         }
         scene.add(mandiList[mandi_counter]);
+
       }
+
+      showMandibular.disabled = true
+      showMaxillary.disabled = false
+      showBothButton.disabled = false
 
       isMandiVisible = true;
       isMaxiVisible = false;
@@ -200,6 +263,10 @@ class World {
         scene.add(maxiList[maxi_counter]);
       }
 
+      showMandibular.disabled = false
+      showMaxillary.disabled = true
+      showBothButton.disabled = false
+
       isMandiVisible = false;
       isMaxiVisible = true;
       isBothVisible = false;
@@ -221,6 +288,11 @@ class World {
         scene.add(mandiList[mandi_counter]);
         scene.add(maxiList[maxi_counter]);
       }
+
+      showMandibular.disabled = false
+      showMaxillary.disabled = false
+      showBothButton.disabled = true
+
       isMandiVisible = true;
       isMaxiVisible = true;
       isBothVisible = true;
@@ -231,40 +303,7 @@ class World {
   }
 
 
-  async add_() {
-
-    // function modelShow() {
-
-    //   let m;
-
-    //   var model =  [mandiList[0], maxiList[0]];
-
-    //   for (m = 0; m < model.length; m++) {
-
-    //     // console.log(model[m]);
-
-    //     if(model[m].text == event.target.id){
-    //       scene.add(model[m]);
-    //     }
-    //     else {
-    //       scene.remove(model[m]);
-    //     }
-        
-    //   }
-
-    //   // scene.add(mandi[0]);
-
-    //   // console.log(event.target.id);
-    //   // console.log (mandiList[0])
-
-    // }
-
-    // let j;
-
-    // for (j = 0; j < buttons.length; j++) {
-    //   buttons[j].addEventListener('click', modelShow);
-    // }
-
+  async show_master() {
 
     function showMandi_0(){
       let n;
@@ -1089,209 +1128,6 @@ class World {
       // console.log('switched to Maxillary 17');
     }
     buttons_maxi[17].addEventListener('click', showMaxi_17);
-  }
-
-
-  //functions to load model asynchrously
-  async addModel_1() {
-    const { mandibular, maxillary } = await loadNext1();
-
-    mandiList[1] = mandibular;
-    maxiList[1] = maxillary;
-
-    buttons_mandi[1].disabled = false;
-    buttons_maxi[1].disabled = false;
-
-    this.addModel_2();
-  }
-
-  async addModel_2() {
-    const { mandibular, maxillary } = await loadNext2();
-
-    mandiList[2] = mandibular;
-    maxiList[2] = maxillary;
-    buttons_mandi[2].disabled = false;
-    buttons_maxi[2].disabled = false;
-
-    this.addModel_3();
-  }
-
-  async addModel_3() {
-    const { mandibular, maxillary } = await loadNext3();
-
-    mandiList[3] = mandibular;
-    maxiList[3] = maxillary;
-
-    buttons_mandi[3].disabled = false;
-    buttons_maxi[3].disabled = false;
-
-    this.addModel_4();
-  }
-
-  async addModel_4() {
-    const { mandibular, maxillary } = await loadNext4();
-
-    mandiList[4] = mandibular;
-    maxiList[4] = maxillary;
-
-    buttons_mandi[4].disabled = false;
-    buttons_maxi[4].disabled = false;
-
-    this.addModel_5();
-  }
-
-  async addModel_5() {
-    const { mandibular, maxillary } = await loadNext5();
-
-    mandiList[5] = mandibular;
-    maxiList[5] = maxillary;
-
-    buttons_mandi[5].disabled = false;
-    buttons_maxi[5].disabled = false;
-
-    this.addModel_6();
-  }
-
-  async addModel_6() {
-    const { mandibular, maxillary } = await loadNext6();
-
-    mandiList[6] = mandibular;
-    maxiList[6] = maxillary;
-
-    buttons_mandi[6].disabled = false;
-    buttons_maxi[6].disabled = false;
-
-    this.addModel_7();
-  }
-
-  async addModel_7() {
-    const { mandibular, maxillary } = await loadNext7();
-
-    mandiList[7] = mandibular;
-    maxiList[7] = maxillary;
-
-    buttons_mandi[7].disabled = false;
-    buttons_maxi[7].disabled = false;
-
-    this.addModel_8();
-  }
-
-  async addModel_8() {
-    const { mandibular, maxillary } = await loadNext8();
-
-    mandiList[8] = mandibular;
-    maxiList[8] = maxillary;
-
-    buttons_mandi[8].disabled = false;
-    buttons_maxi[8].disabled = false;
-
-    this.addModel_9();
-  }
-
-  async addModel_9() {
-    const { mandibular, maxillary } = await loadNext9();
-
-    mandiList[9] = mandibular;
-    maxiList[9] = maxillary;
-
-    buttons_mandi[9].disabled = false;
-    buttons_maxi[9].disabled = false;
-
-    this.addModel_10();
-  }
-
-  async addModel_10() {
-    const { mandibular, maxillary } = await loadNext10();
-
-    mandiList[10] = mandibular;
-    maxiList[10] = maxillary;
-
-    buttons_mandi[10].disabled = false;
-    buttons_maxi[10].disabled = false;
-
-    this.addModel_11();
-  }
-
-  async addModel_11() {
-    const { mandibular, maxillary } = await loadNext11();
-
-    mandiList[11] = mandibular;
-    maxiList[11] = maxillary;
-
-    buttons_mandi[11].disabled = false;
-    buttons_maxi[11].disabled = false;
-
-    this.addModel_12();
-  }
-
-  async addModel_12() {
-    const { mandibular, maxillary } = await loadNext12();
-
-    mandiList[12] = mandibular;
-    maxiList[12] = maxillary;
-
-    buttons_mandi[12].disabled = false;
-    buttons_maxi[12].disabled = false;
-
-    this.addModel_13();
-  }
-
-  async addModel_13() {
-    const { mandibular, maxillary } = await loadNext13();
-
-    mandiList[13] = mandibular;
-    maxiList[13] = maxillary;
-
-    buttons_mandi[13].disabled = false;
-    buttons_maxi[13].disabled = false;
-
-    this.addModel_14();
-  }
-
-  async addModel_14() {
-    const { mandibular, maxillary } = await loadNext14();
-
-    mandiList[14] = mandibular;
-    maxiList[14] = maxillary;
-
-    buttons_mandi[14].disabled = false;
-    buttons_maxi[14].disabled = false;
-
-    this.addModel_15();
-  }
-
-  async addModel_15() {
-    const { mandibular, maxillary } = await loadNext15();
-
-    mandiList[15] = mandibular;
-    maxiList[15] = maxillary;
-
-    buttons_mandi[15].disabled = false;
-    buttons_maxi[15].disabled = false;
-
-    this.addModel_16();
-  }
-
-  async addModel_16() {
-    const { mandibular, maxillary } = await loadNext16();
-
-    mandiList[16] = mandibular;
-    maxiList[16] = maxillary;
-
-    buttons_mandi[16].disabled = false;
-    buttons_maxi[16].disabled = false;
-
-    this.addModel_17();
-  }
-
-  async addModel_17() {
-    const { mandibular, maxillary } = await loadNext17();
-
-    mandiList[17] = mandibular;
-    maxiList[17] = maxillary;
-
-    buttons_mandi[17].disabled = false;
-    buttons_maxi[17].disabled = false;
   }
 
   render() {
